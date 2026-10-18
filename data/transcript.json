@@ -1,1 +1,132 @@
-{}
+{
+  "model": "claude-opus-5-5",
+  "generated_at": "2026-10-18T19:25:43.569Z",
+  "paystack": "mock",
+  "scenarios": {
+    "booking": [
+      {
+        "kind": "customer",
+        "text": "Hi, do you have anything for 2 people from 12 to 15 December?",
+        "at": "2026-11-20T08:00:00.000Z"
+      },
+      {
+        "kind": "tool",
+        "name": "check_availability",
+        "input": {
+          "check_in": "2026-12-12",
+          "check_out": "2026-12-15",
+          "guests": 2
+        },
+        "output": {
+          "nights": 3,
+          "options": [
+            {
+              "apartment_id": "studio-lekki",
+              "name": "Studio, Lekki Phase 1",
+              "available": false,
+              "total": "₦135,000"
+            },
+            {
+              "apartment_id": "1bed-lekki",
+              "name": "1-bedroom, Lekki Phase 1",
+              "available": true,
+              "total": "₦195,000"
+            },
+            {
+              "apartment_id": "2bed-vi",
+              "name": "2-bedroom, Victoria Island",
+              "available": false,
+              "total": "₦360,000"
+            }
+          ]
+        }
+      },
+      {
+        "kind": "bot",
+        "text": "Hi! Thanks for reaching out to Ewa Stays 😊\n\nFor 2 guests, 12 to 15 December (3 nights), we have one apartment free:\n\n*1-bedroom, Lekki Phase 1*: ₦195,000 total (₦65,000/night)\n\nThe Studio and the 2-bedroom are already booked for those dates.\n\nAll our apartments have 24-hour power, Wi-Fi, AC, a fully equipped kitchen and a parking space. Check-in is from 2pm and check-out is by 12 noon.\n\nWant me to book it for you? I'll just need your full name and email address.",
+        "at": "2026-11-20T08:00:00.000Z"
+      },
+      {
+        "kind": "customer",
+        "text": "Yes please! Is there constant light? I work from home",
+        "at": "2026-11-20T08:02:00.000Z"
+      },
+      {
+        "kind": "bot",
+        "text": "Yes, there is! The apartment has 24-hour power from an inverter and a generator, so you'll always have light. There's Wi-Fi too, so you can work from home without any problem 💻\n\nTo book the 1-bedroom for 12 to 15 December, please send me:\n- Your full name\n- Your email address (your Paystack receipt goes here)",
+        "at": "2026-11-20T08:02:00.000Z"
+      },
+      {
+        "kind": "customer",
+        "text": "Tolu Adebayo, tolu.adebayo@example.com",
+        "at": "2026-11-20T08:04:00.000Z"
+      },
+      {
+        "kind": "tool",
+        "name": "create_booking",
+        "input": {
+          "apartment_id": "1bed-lekki",
+          "check_in": "2026-12-12",
+          "check_out": "2026-12-15",
+          "guests": 2,
+          "guest_name": "Tolu Adebayo",
+          "guest_email": "tolu.adebayo@example.com"
+        },
+        "output": {
+          "reference": "EWA-0C3755",
+          "amount": "₦195,000",
+          "payment_link": "https://checkout.paystack.com/demo-ewa-0c3755",
+          "held_for_minutes": 30
+        }
+      },
+      {
+        "kind": "bot",
+        "text": "Thanks, Tolu! Your booking is held 🎉\n\n*1-bedroom, Lekki Phase 1*\n12 to 15 December (3 nights), 2 guests\nTotal: ₦195,000\nReference: EWA-0C3755\n\nPay here: https://checkout.paystack.com/demo-ewa-0c3755\nYou can pay by card, bank transfer or USSD. Please pay within *30 minutes* or the hold will expire.\n\nGood to know:\n- At check-in you'll pay a ₦50,000 caution deposit by bank transfer. We refund it within 48 hours of check-out if nothing is damaged.\n- If you cancel 7 or more days before check-in, you get a full refund. Cancellations after that aren't refunded.\n\nYour receipt will go to tolu.adebayo@example.com. Is there anything else I can help with?",
+        "at": "2026-11-20T08:04:00.000Z"
+      },
+      {
+        "kind": "payment",
+        "reference": "EWA-0C3755",
+        "amount": 195000,
+        "at": "2026-11-20T08:07:00.000Z"
+      },
+      {
+        "kind": "bot",
+        "text": "Payment received, thank you Tolu! ✅\n\n*Booking EWA-0C3755 is confirmed*\n1-bedroom, Lekki Phase 1\nSat 12 Dec → Tue 15 Dec (3 nights, 2 guests)\nPaid: ₦195,000\n\nCheck-in is from 2pm. We'll send the address and your host's number the day before. Please have the ₦50,000 refundable caution deposit ready to transfer at check-in.",
+        "at": "2026-11-20T08:07:00.000Z"
+      }
+    ],
+    "handoff": [
+      {
+        "kind": "customer",
+        "text": "Hello. Can you arrange an airport pickup from Murtala Muhammed for my stay?",
+        "at": "2026-11-20T08:00:00.000Z"
+      },
+      {
+        "kind": "tool",
+        "name": "hand_off_to_human",
+        "input": {
+          "summary": "Customer is asking whether we can arrange an airport pickup from Murtala Muhammed Airport for their stay. Booking details (dates/apartment) not yet shared."
+        },
+        "output": {
+          "status": "Host notified. They usually reply within an hour, 8am to 8pm."
+        }
+      },
+      {
+        "kind": "bot",
+        "text": "I can't confirm airport pickups myself, so I've passed your request to the host. They usually reply within an hour, between 8am and 8pm.\n\nTo help them, could you send:\n- Your arrival date and flight time\n- How many people are travelling\n\nI can also check apartment availability for your dates while you wait 😊",
+        "at": "2026-11-20T08:00:00.000Z"
+      },
+      {
+        "kind": "customer",
+        "text": "Okay, thanks. Is there parking at the apartment?",
+        "at": "2026-11-20T08:02:00.000Z"
+      },
+      {
+        "kind": "bot",
+        "text": "Yes, every apartment comes with its own parking space 🚗\n\nThey all also have:\n- 24-hour power (inverter and generator)\n- Wi-Fi\n- Air conditioning\n- A fully equipped kitchen\n\nWant me to check which apartments are free for your dates?",
+        "at": "2026-11-20T08:02:00.000Z"
+      }
+    ]
+  }
+}
